@@ -3,10 +3,7 @@ package Executionfile;
 import cucumber.api.CucumberOptions;
 import cucumber.api.testng.CucumberFeatureWrapper;
 import cucumber.api.testng.TestNGCucumberRunner;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 @CucumberOptions(
         features= {"src/test/Feature"}
@@ -31,14 +28,18 @@ public class RunnerFile {
         return testing.provideFeatures();
 
     }
+    @BeforeTest
 
+
+    @Parameters({"apkname","port","devicename"})
     @Test()
-    public void startAppiumserverAndEmulator()
+    public void startAppiumserverAndEmulator(String apkname,String port,String devicename)
     {
+        SetCapabilities.setCapabilitiesAndroid(new StringBuilder(apkname),new StringBuilder(port),new StringBuilder(devicename));
 
     }
 
-    @Test(groups = "Positive",dataProvider = "data")
+    @Test(dataProvider = "data")
     public void ruunnnn(CucumberFeatureWrapper cuc){
         System.out.println("This is Test");
         testing.runCucumber(cuc.getCucumberFeature());
