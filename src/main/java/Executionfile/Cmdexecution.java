@@ -24,7 +24,7 @@ public class Cmdexecution {
         try {
             p = builder.start();
         } catch (IOException e) {
-            System.out.println("Exception occurs in stating the Process Builder");
+            System.out.println("Exception occurs in starting the Process Builder");
         }
 
         BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
