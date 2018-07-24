@@ -2,6 +2,6 @@
 <suite name="testng" >
 
     <parameter name="OS" value="windows"/>
-    <parameter name="plaform" value="android"/>
+    <parameter name="platform" value="android"/>
 
 </suite>

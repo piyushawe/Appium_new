@@ -3,8 +3,15 @@ package Executionfile;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class Cmdexecution {
+    static boolean realdevice=false;
+    static boolean emulator=false;
+    static boolean simulator=false;
+   static List devices=new ArrayList();
     public static void enterCmdCommand(StringBuilder command)
     {try
     {
@@ -63,8 +70,27 @@ public class Cmdexecution {
                         }
                         break;
                     }
+                    case "adb devices":
+                    {if (line.toString().endsWith("device")) {
+                        //System.out.println(line);
+                        StringBuilder lin=line;
+                        String[] splitted=lin.toString().split("\\s");
+                        devices.add(splitted[1]);
+                        //System.out.println(splitted[1]);
+                    }
+                        break;
                 }
         }
+
+            }
+            if(command.toString().equalsIgnoreCase("adb devices")) {
+                if (devices.isEmpty()) {
+                    emulator=true;
+                }
+                else{
+                    realdevice=true;
+                }
             }
         }
+}
     }

@@ -6,7 +6,7 @@ import cucumber.api.testng.TestNGCucumberRunner;
 import org.testng.annotations.*;
 
 @CucumberOptions(
-        features= {"src/test/Feature"}
+        features= {"src/Feature"}
         ,glue= {"Cucmber_test"}
         ,monochrome=true
         ,plugin= {"pretty","html:target/cucumber_html_report",
@@ -17,6 +17,21 @@ import org.testng.annotations.*;
 //@Listeners(Cucmber_test.Listeners.class)
 public class RunnerFile {
     private TestNGCucumberRunner testing;
+    @BeforeClass
+    @Parameters({"OS","platform"})
+    public void cmd(String OS ,String platform)
+    {
+        if(OS.equalsIgnoreCase("windows"))
+        {
+            Cmdexecution.enterCmdCommandAndGetResult(new StringBuilder("adb devices"));
+
+
+        }
+        else if(OS.equalsIgnoreCase("mac"))
+        {
+
+        }
+    }
     @BeforeClass(alwaysRun = true)
     public void before(){
         System.out.println("This is Beforeclass");
