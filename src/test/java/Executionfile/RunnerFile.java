@@ -24,12 +24,16 @@ public class RunnerFile {
         if(OS.equalsIgnoreCase("windows"))
         {
             Cmdexecution.enterCmdCommandAndGetResult(new StringBuilder("adb devices"));
+            if(Cmdexecution.emulator)
+            {
 
-
+            }
         }
         else if(OS.equalsIgnoreCase("mac"))
         {
 
+        }else{
+            System.out.println("Enter valid OS");
         }
     }
     @BeforeClass(alwaysRun = true)
