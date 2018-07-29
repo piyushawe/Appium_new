@@ -11,6 +11,8 @@ public class Cmdexecution {
     static boolean realdevice=false;
     static boolean emulator=false;
     static boolean simulator=false;
+    static StringBuilder desiredstring=null;
+    static ArrayList<StringBuilder> emulator_devices=new ArrayList<>();
    static List devices=new ArrayList();
     public static void enterCmdCommand(StringBuilder command)
     {try
@@ -23,7 +25,7 @@ public class Cmdexecution {
     }
     }
 
-    public static StringBuilder enterCmdCommandAndGetResult(StringBuilder command) {
+    public static void enterCmdCommandAndGetResult(StringBuilder command) {
         ProcessBuilder builder = new ProcessBuilder(
                 "cmd.exe", "/c", command.toString());
         builder.redirectErrorStream(true);
@@ -39,7 +41,7 @@ public class Cmdexecution {
         while (true) {
             try {
                 line = new StringBuilder(r.readLine());
-            } catch (IOException e) {
+            } catch (IOException | NullPointerException e) {
                 System.out.println("Exception occured on reading line");
             }
             if (line == null) {
@@ -63,10 +65,12 @@ public class Cmdexecution {
 
                     case "adb":
                     {if (line.toString().contains("Installed as")) {
-                            System.out.println(line);
-                            StringBuilder abc = line;
-                            abc = abc.replace("Installed as ", "");
-                            System.out.print(abc.replace("platform-tools\\adb.exe", ""));
+                           System.out.println(line);StringBuilder abc = line;
+                           String[] splitted= abc.toString().split("as ");
+                           desiredstring=new StringBuilder(splitted[1]);
+                           desiredstring=new StringBuilder("cd /d " + desiredstring.toString().
+                                   substring(0,desiredstring.toString().
+                                           indexOf("\\abd.exe"))+"&& emulator -avd "+emulator_devices.get(0));
                         }
                         break;
                     }
@@ -80,6 +84,10 @@ public class Cmdexecution {
                     }
                         break;
                 }
+                    case "emulator -list-avds":
+                    {
+                        emulator_devices.add(line);
+                    }
         }
 
             }

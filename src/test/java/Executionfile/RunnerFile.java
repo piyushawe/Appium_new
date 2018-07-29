@@ -26,6 +26,9 @@ public class RunnerFile {
             Cmdexecution.enterCmdCommandAndGetResult(new StringBuilder("adb devices"));
             if(Cmdexecution.emulator)
             {
+                Cmdexecution.enterCmdCommandAndGetResult(new StringBuilder("emulator -list-avds"));
+                Cmdexecution.enterCmdCommandAndGetResult((new StringBuilder("adb")));
+                Cmdexecution.enterCmdCommand(Cmdexecution.desiredstring);
 
             }
         }
