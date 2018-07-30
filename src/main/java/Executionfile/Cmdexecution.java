@@ -12,6 +12,7 @@ public class Cmdexecution {
     static boolean emulator=false;
     static boolean simulator=false;
     static StringBuilder desiredstring=null;
+    static StringBuilder emulator_name=null;
     static ArrayList<StringBuilder> emulator_devices=new ArrayList<>();
    static List devices=new ArrayList();
     public static void enterCmdCommand(StringBuilder command)
@@ -68,9 +69,17 @@ public class Cmdexecution {
                            System.out.println(line);StringBuilder abc = line;
                            String[] splitted= abc.toString().split("as ");
                            desiredstring=new StringBuilder(splitted[1]);
-                           desiredstring=new StringBuilder("cd /d " + desiredstring.toString().
-                                   substring(0,desiredstring.toString().
-                                           indexOf("\\abd.exe"))+"&& emulator -avd "+emulator_devices.get(0));
+                           if(emulator_name==null) {
+                            desiredstring = new StringBuilder("cd /d " + desiredstring.toString().
+                                    substring(0, desiredstring.toString().
+                                            indexOf("\\abd.exe")) + "&& emulator -avd " + emulator_devices.get(0));
+                        }
+                        else
+                        {
+                            desiredstring = new StringBuilder("cd /d " + desiredstring.toString().
+                                    substring(0, desiredstring.toString().
+                                            indexOf("\\abd.exe")) + "&& emulator -avd " + emulator_name);
+                        }
                         }
                         break;
                     }

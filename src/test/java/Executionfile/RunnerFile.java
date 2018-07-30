@@ -28,14 +28,20 @@ public class RunnerFile {
             {
                 if(emulator_name==null) {
                     Cmdexecution.enterCmdCommandAndGetResult(new StringBuilder("emulator -list-avds"));
+                }else
+                {
+                    Cmdexecution.emulator_name=new StringBuilder(emulator_name);
                 }
                 Cmdexecution.enterCmdCommandAndGetResult((new StringBuilder("adb")));
                 Cmdexecution.enterCmdCommand(Cmdexecution.desiredstring);
-
             }
         }
         else if(OS.equalsIgnoreCase("mac"))
         {
+            if(platform.equalsIgnoreCase("android"))
+            {
+
+            }
 
         }else{
             System.out.println("Enter valid OS");
