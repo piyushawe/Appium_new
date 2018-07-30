@@ -18,15 +18,17 @@ import org.testng.annotations.*;
 public class RunnerFile {
     private TestNGCucumberRunner testing;
     @BeforeClass
-    @Parameters({"OS","platform"})
-    public void cmd(String OS ,String platform)
+    @Parameters({"OS","platform","emulator_name"})
+    public void cmd(String OS ,String platform,@Optional("null") String emulator_name)
     {
         if(OS.equalsIgnoreCase("windows"))
         {
             Cmdexecution.enterCmdCommandAndGetResult(new StringBuilder("adb devices"));
             if(Cmdexecution.emulator)
             {
-                Cmdexecution.enterCmdCommandAndGetResult(new StringBuilder("emulator -list-avds"));
+                if(emulator_name==null) {
+                    Cmdexecution.enterCmdCommandAndGetResult(new StringBuilder("emulator -list-avds"));
+                }
                 Cmdexecution.enterCmdCommandAndGetResult((new StringBuilder("adb")));
                 Cmdexecution.enterCmdCommand(Cmdexecution.desiredstring);
 

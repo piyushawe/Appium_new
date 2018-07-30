@@ -3,5 +3,6 @@
 
     <parameter name="OS" value="windows"/>
     <parameter name="platform" value="android"/>
+    <parameter name="emulator_name" value="demo"/>
 
 </suite>
