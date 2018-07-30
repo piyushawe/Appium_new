@@ -41,6 +41,9 @@ public class RunnerFile {
             if(platform.equalsIgnoreCase("android"))
             {
 
+            }else if(platform.equalsIgnoreCase("iOS"))
+            {
+
             }
 
         }else{
