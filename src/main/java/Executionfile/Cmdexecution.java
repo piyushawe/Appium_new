@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 public class Cmdexecution {
@@ -84,11 +85,11 @@ public class Cmdexecution {
                         break;
                     }
                     case "adb devices":
-                    {if (line.toString().endsWith("device")) {
+                    {if (line.toString().startsWith("device")) {
                         //System.out.println(line);
                         StringBuilder lin=line;
                         String[] splitted=lin.toString().split("\\s");
-                        devices.add(splitted[1]);
+                        devices.add(splitted[0]);
                         //System.out.println(splitted[1]);
                     }
                         break;
@@ -101,11 +102,19 @@ public class Cmdexecution {
 
             }
             if(command.toString().equalsIgnoreCase("adb devices")) {
-                if (devices.isEmpty()) {
-                    emulator=true;
-                }
-                else{
+                Iterator it=devices.iterator();
+                while(it.hasNext())
+                {
+                    String s =(String)it.next();
+
+                if (!(s.contains("emulator")))
+                {
                     realdevice=true;
+                }
+                }
+                if(realdevice==false)
+                {
+                    emulator=true;
                 }
             }
         }
